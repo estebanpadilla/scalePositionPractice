@@ -13,7 +13,7 @@ function init() {
     var notes = [c, d, e, f, g, a, b];
     var noteType = ['', 'b', '#'];
 
-    var bgColors = ['#e81e26', '#12b57b', '#00addc', '#3fa9f5', '#3fa9f5'];
+    var bgColors = ['#feca0c', '#e44322', '#51e8b9', '#7e4556', '#0967b1'];
     var currentBbColor;
 
     var counter = 0;
@@ -42,33 +42,30 @@ function init() {
     noteTxt.id = 'noteTxt';
     positionTxt.id = 'positionTxt';
     timerTxt.id = 'timerTxt';
-    newBtn.id = 'newBtn';
-    newBtn.innerText = 'New Position';
-    newBtn.addEventListener('click', setNewPosition, false);
+
 
     var textColor = 'white';
     var notesFontFamily = '"Contrail One", cursive';;
     var fontFamily = '"Contrail One", cursive';
+
     noteTxt.style.color = textColor;
-    positionTxt.style.color = textColor;
-    timerTxt.style.color = textColor;
-    newBtn.style.backgroundColor = textColor;
-
     noteTxt.style.fontFamily = notesFontFamily;
-    positionTxt.style.fontFamily = fontFamily;
-    timerTxt.style.fontFamily = fontFamily;
-    newBtn.style.fontFamily = fontFamily;
-
     noteTxt.style.fontSize = '300px';
     noteTxt.style.marginTop = '10px';
     noteTxt.style.marginBottom = '0px';
     noteTxt.style.textAlign = 'center';
 
+
+    positionTxt.style.color = textColor;
+    positionTxt.style.fontFamily = fontFamily;
     positionTxt.style.fontSize = '50px';
     positionTxt.style.marginTop = '-50px';
     positionTxt.style.marginBottom = '0px';
     positionTxt.style.textAlign = 'center';
 
+
+    timerTxt.style.color = textColor;
+    timerTxt.style.fontFamily = fontFamily;
     timerTxt.style.fontSize = '30px';
     timerTxt.style.marginTop = '-5px';
     timerTxt.style.marginBottom = '0px';
@@ -77,10 +74,16 @@ function init() {
     newBtn.style.textAlign = 'center';
     newBtn.style.height = '60px';
     newBtn.style.width = screenWidth + 'px';
+    newBtn.style.fontFamily = fontFamily;
     newBtn.style.fontSize = '20px';
+    newBtn.style.color = 'black';
     newBtn.style.border = 'none';
     newBtn.style.borderRadius = '0px';
     newBtn.style.marginTop = '30px';
+    newBtn.style.backgroundColor = textColor;
+    newBtn.id = 'newBtn';
+    newBtn.innerText = 'New Position';
+    newBtn.addEventListener('click', setNewPosition, false);
 
     window.onresize = onresize;
 
