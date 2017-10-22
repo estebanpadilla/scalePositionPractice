@@ -3,7 +3,7 @@
 		"rules": "database.rules.json"
 	},
 	"hosting": {
-		"public": "dist",
+		"public": "/dist",
 		"rewrites": [{
 			"source": "**",
 			"destination": "/index.html"
@@ -13,7 +13,8 @@
 			".firebaserc",
 			"**/.*",
 			"**/node_modules/**",
-			"package.json"
+			"package.json",
+			".vscode"
 		]
 	}
 }

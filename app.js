@@ -25,15 +25,19 @@ function init() {
     var screenWidth = body.clientWidth;
     var screenHeight = body.clientHeight;
 
+    var container = document.createElement('div');
     var noteTxt = document.createElement('p');
     var positionTxt = document.createElement('p');
     var timerTxt = document.createElement('p');
-    var newBtn = document.createElement('button');;
+    var newBtn = document.createElement('button');
 
-    body.appendChild(noteTxt);
-    body.appendChild(positionTxt);
-    body.appendChild(timerTxt);
-    body.appendChild(newBtn);
+    body.appendChild(container);
+    container.appendChild(noteTxt);
+    container.appendChild(positionTxt);
+    container.appendChild(timerTxt);
+    container.appendChild(newBtn);
+
+    container.style.position = 'absolute';
 
     noteTxt.id = 'noteTxt';
     positionTxt.id = 'positionTxt';
@@ -43,30 +47,31 @@ function init() {
     newBtn.addEventListener('click', setNewPosition, false);
 
     var textColor = 'white';
-    var fontFamily = '"Arial Black", Gadget, sans-serif';
+    var notesFontFamily = '"Contrail One", cursive';;
+    var fontFamily = '"Contrail One", cursive';
     noteTxt.style.color = textColor;
     positionTxt.style.color = textColor;
     timerTxt.style.color = textColor;
     newBtn.style.backgroundColor = textColor;
 
-    noteTxt.style.fontFamily = fontFamily;
+    noteTxt.style.fontFamily = notesFontFamily;
     positionTxt.style.fontFamily = fontFamily;
     timerTxt.style.fontFamily = fontFamily;
     newBtn.style.fontFamily = fontFamily;
 
-    noteTxt.style.fontSize = '250px';
-    noteTxt.style.marginTop = '0px';
+    noteTxt.style.fontSize = '300px';
+    noteTxt.style.marginTop = '10px';
     noteTxt.style.marginBottom = '0px';
     noteTxt.style.textAlign = 'center';
 
     positionTxt.style.fontSize = '50px';
-    positionTxt.style.marginTop = '-60px';
+    positionTxt.style.marginTop = '-50px';
     positionTxt.style.marginBottom = '0px';
     positionTxt.style.textAlign = 'center';
 
     timerTxt.style.fontSize = '30px';
-    timerTxt.style.marginTop = '-10px';
-    timerTxt.style.marginBottom = '20px';
+    timerTxt.style.marginTop = '-5px';
+    timerTxt.style.marginBottom = '0px';
     timerTxt.style.textAlign = 'center';
 
     newBtn.style.textAlign = 'center';
@@ -75,6 +80,7 @@ function init() {
     newBtn.style.fontSize = '20px';
     newBtn.style.border = 'none';
     newBtn.style.borderRadius = '0px';
+    newBtn.style.marginTop = '30px';
 
     window.onresize = onresize;
 
@@ -129,7 +135,14 @@ function init() {
     }
 
     function onresize(e) {
+        var containerHeight = container.clientHeight;
+        body = document.getElementById('body');
+        screenHeight = window.innerHeight;
         screenWidth = body.clientWidth;
+        var ypos = (screenHeight - containerHeight) / 2;
+        container.style.top = ypos + 'px';
         newBtn.style.width = screenWidth + 'px';
+
     }
+    onresize(null);
 }
