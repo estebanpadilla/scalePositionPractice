@@ -45,7 +45,7 @@ function init() {
     noteTxt.style.color = textColor;
     noteTxt.style.fontFamily = notesFontFamily;
     noteTxt.style.fontSize = '250px';
-    noteTxt.style.marginTop = '-50px';
+    noteTxt.style.marginTop = '-20px';
     noteTxt.style.marginBottom = '0px';
     noteTxt.style.userSelect = 'none';
     noteTxt.style.textShadow = '5px 5px 10px rgba(0, 0, 0, 0.1)';
