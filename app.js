@@ -17,7 +17,7 @@ function init() {
     var currentBbColor;
 
     var counter = 0;
-    var timeLimit = 5;
+    var timeLimit = 30;
     var timeCounter = timeLimit;
     var noteIndex = 0;
 
