@@ -17,7 +17,7 @@ function init() {
     var currentBbColor;
 
     var counter = 0;
-    var timeLimit = 4;
+    var timeLimit = 30;
     var timeCounter = timeLimit;
     var noteIndex = 0;
     var isPaused = false;
@@ -44,22 +44,22 @@ function init() {
     playBtn.id = 'playBtn';
 
     var textColor = 'white';
-    var notesFontFamily = '"Contrail One", cursive';
+    var notesFontFamily = '"Oswald", sans-serif';
     var fontFamily = '"Open Sans Condensed", sans-serif';
 
     noteTxt.style.color = textColor;
     noteTxt.style.fontFamily = notesFontFamily;
-    noteTxt.style.fontSize = '250px';
+    noteTxt.style.fontSize = '300px';
     noteTxt.style.fontWeight = '700';
-    noteTxt.style.marginTop = '-20px';
+    noteTxt.style.marginTop = '-110px';
     noteTxt.style.marginBottom = '0px';
     noteTxt.style.userSelect = 'none';
     noteTxt.style.textShadow = '5px 5px 10px rgba(0, 0, 0, 0.1)';
 
     positionTxt.style.color = textColor;
     positionTxt.style.fontFamily = fontFamily;
-    positionTxt.style.fontSize = '55px';
-    positionTxt.style.marginTop = '-60px';
+    positionTxt.style.fontSize = '65px';
+    positionTxt.style.marginTop = '-80px';
     positionTxt.style.marginBottom = '0px';
     positionTxt.style.userSelect = 'none';
 
