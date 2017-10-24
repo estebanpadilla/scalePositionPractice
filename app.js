@@ -9,17 +9,18 @@ function init() {
     var g = new Note('G');
     var a = new Note('A');
     var b = new Note('B');
-    var currentNote = null;
     var notes = [c, d, e, f, g, a, b];
     var noteType = ['', 'b', '#'];
+    var previousNotes = [];
 
     var bgColors = ['#feca0c', '#e44322', '#51e8b9', '#7e4556', '#0967b1'];
     var currentBbColor;
 
     var counter = 0;
-    var timeLimit = 30;
+    var timeLimit = 4;
     var timeCounter = timeLimit;
     var noteIndex = 0;
+    var isPaused = false;
 
     var body = document.getElementById('body');
     var screenWidth = body.clientWidth;
@@ -29,22 +30,27 @@ function init() {
     var noteTxt = document.createElement('p');
     var positionTxt = document.createElement('p');
     var timerTxt = document.createElement('p');
-    var newBtn = document.createElement('button');
-    var newBtnWidth = 250;
+    var resetBtn = document.createElement('button');
+    var playBtn = document.createElement('button');
+    var buttonWidth = 300;
+    var buttonHeight = 40;
 
     container.style.position = 'absolute';
 
     noteTxt.id = 'noteTxt';
     positionTxt.id = 'positionTxt';
     timerTxt.id = 'timerTxt';
+    resetBtn.id = 'resetBtn';
+    playBtn.id = 'playBtn';
 
     var textColor = 'white';
-    var notesFontFamily = '"Comfortaa", cursive';
-    var fontFamily = '"Comfortaa", cursive';
+    var notesFontFamily = '"Contrail One", cursive';
+    var fontFamily = '"Open Sans Condensed", sans-serif';
 
     noteTxt.style.color = textColor;
     noteTxt.style.fontFamily = notesFontFamily;
     noteTxt.style.fontSize = '250px';
+    noteTxt.style.fontWeight = '700';
     noteTxt.style.marginTop = '-20px';
     noteTxt.style.marginBottom = '0px';
     noteTxt.style.userSelect = 'none';
@@ -52,77 +58,130 @@ function init() {
 
     positionTxt.style.color = textColor;
     positionTxt.style.fontFamily = fontFamily;
-    positionTxt.style.fontSize = '50px';
-    positionTxt.style.marginTop = '-30px';
+    positionTxt.style.fontSize = '55px';
+    positionTxt.style.marginTop = '-60px';
     positionTxt.style.marginBottom = '0px';
     positionTxt.style.userSelect = 'none';
 
     timerTxt.style.color = textColor;
     timerTxt.style.fontFamily = fontFamily;
-    timerTxt.style.fontSize = '30px';
-    timerTxt.style.marginTop = '-5px';
+    timerTxt.style.fontSize = '20px';
+    timerTxt.style.marginTop = '-15px';
     timerTxt.style.marginBottom = '0px';
     timerTxt.style.userSelect = 'none';
 
-    newBtn.style.textAlign = 'center';
-    newBtn.style.height = '60px';
-    newBtn.style.width = screenWidth + 'px';
-    newBtn.style.fontFamily = fontFamily;
-    newBtn.style.fontSize = '20px';
-    newBtn.style.color = 'black';
-    newBtn.style.border = 'none';
-    newBtn.style.borderRadius = '30px';
-    newBtn.style.marginTop = '30px';
-    newBtn.style.backgroundColor = textColor;
-    newBtn.id = 'newBtn';
-    newBtn.innerText = 'New Position';
-    newBtn.addEventListener('click', setNewPosition, false);
-    newBtn.style.width = newBtnWidth + 'px';
-    newBtn.style.outline = 'none';
-    newBtn.style.cursor = 'pointer';
+    resetBtn.style.textAlign = 'center';
+    resetBtn.style.height = buttonHeight + 'px';
+    resetBtn.style.width = screenWidth + 'px';
+    resetBtn.style.fontFamily = fontFamily;
+    resetBtn.style.fontSize = '20px';
+    resetBtn.style.color = 'black';
+    resetBtn.style.border = 'none';
+    resetBtn.style.borderRadius = '30px';
+    resetBtn.style.backgroundColor = textColor;
+    resetBtn.id = 'newBtn';
+    resetBtn.innerText = 'Reset';
+    resetBtn.addEventListener('click', setNewPosition, false);
+    resetBtn.style.width = buttonWidth + 'px';
+    resetBtn.style.outline = 'none';
+    resetBtn.style.cursor = 'pointer';
+    resetBtn.style.display = 'block';
+    resetBtn.style.marginTop = '20px';
+    resetBtn.style.marginLeft = 'auto';
+    resetBtn.style.marginRight = 'auto';
+
+    playBtn.style.textAlign = 'center';
+    playBtn.style.height = buttonHeight + 'px';
+    playBtn.style.width = screenWidth + 'px';
+    playBtn.style.fontFamily = fontFamily;
+    playBtn.style.fontSize = '20px';
+    playBtn.style.color = 'black';
+    playBtn.style.border = 'none';
+    playBtn.style.borderRadius = '30px';
+    playBtn.style.backgroundColor = textColor;
+    playBtn.id = 'newBtn';
+    playBtn.innerText = 'Pause';
+    playBtn.addEventListener('click', playBtnAction, false);
+    playBtn.style.width = buttonWidth + 'px';
+    playBtn.style.outline = 'none';
+    playBtn.style.cursor = 'pointer';
+    playBtn.style.display = 'block';
+    playBtn.style.marginTop = '10px';
+    playBtn.style.marginLeft = 'auto';
+    playBtn.style.marginRight = 'auto';
 
     body.appendChild(container);
     container.style.textAlign = 'center';
     container.appendChild(noteTxt);
     container.appendChild(positionTxt);
     container.appendChild(timerTxt);
-    container.appendChild(newBtn);
+    container.appendChild(resetBtn);
+    container.appendChild(playBtn);
 
     window.onresize = onresize;
 
+    setTimer();
+    update();
+    changePositionAndNote();
+
     function update() {
-        window.requestAnimationFrame(update);
+        if (!isPaused) {
+            window.requestAnimationFrame(update);
+            counter++;
+            if (counter == 60) {
+                counter = 0;
 
-        counter++;
-        if (counter == 60) {
-            counter = 0;
+                timeCounter--;
 
-            timeCounter--;
+                if (timeCounter < 0) {
+                    timeCounter = timeLimit;
+                    changePositionAndNote();
+                }
 
-            if (timeCounter < 0) {
-                timeCounter = timeLimit;
-                changePositionAndNote();
+                setTimer();
             }
-
-            setTimer();
         }
     }
 
-    setTimer();
-    changePositionAndNote();
-    update();
-
     function changePositionAndNote() {
         noteIndex = Math.floor(Math.random() * notes.length);
-        currentNote = notes[noteIndex];
-        noteTxt.innerText = currentNote.letter + '' + noteType[Math.floor(Math.random() * noteType.length)];
-        positionTxt.innerHTML = 'Position ' + (Math.floor(Math.random() * 7) + 1);
-        body.style.backgroundColor = getBgColor();
-        newBtn.style.color = currentBbColor;
+        var note = new Note(notes[noteIndex].letter);
+        note.noteType = noteType[Math.floor(Math.random() * noteType.length)];
+        note.position = (Math.floor(Math.random() * 7) + 1);
+
+        if (checkPreviousNotes(note)) {
+            changePositionAndNote();
+        } else {
+            noteTxt.innerText = note.letter + '' + note.noteType;
+            positionTxt.innerHTML = 'POSITION ' + note.position;
+            getBgColor();
+            body.style.backgroundColor = currentBbColor;
+            resetBtn.style.color = currentBbColor;
+            playBtn.style.color = currentBbColor;
+        }
     }
 
     function setTimer() {
         timerTxt.innerText = 'Time: ' + timeCounter;
+    }
+
+    function getBgColor() {
+        var color = bgColors[(Math.floor(Math.random() * bgColors.length))];
+        if (color == currentBbColor) {
+            return getBgColor();
+        }
+        currentBbColor = color;
+    }
+
+    function checkPreviousNotes(pnote) {
+        for (var i = 0; i < previousNotes.length; i++) {
+            if (previousNotes[i].isPlayed(pnote)) {
+                return true;
+            }
+        }
+        previousNotes.push(pnote);
+        return false;
+
     }
 
     function setNewPosition(e) {
@@ -132,25 +191,27 @@ function init() {
         setTimer();
     }
 
-    function getBgColor() {
-        var color = bgColors[(Math.floor(Math.random() * bgColors.length))];
-        if (color == currentBbColor) {
-            return getBgColor();
-        }
-        currentBbColor = color;
-        return currentBbColor;
-    }
+    onresize(null);
 
     function onresize(e) {
         var containerHeight = container.clientHeight;
         body = document.getElementById('body');
         screenHeight = window.innerHeight;
-        screenWidth = body.clientWidth;
+        screenWidth = window.innerWidth;
         var ypos = (screenHeight - containerHeight) / 2;
-        var xpos = (screenWidth - newBtnWidth) / 2;
+        var xpos = (screenWidth - buttonWidth) / 2;
         container.style.top = ypos + 'px';
         container.style.width = screenWidth + 'px';
-        newBtn.style.left = xpos + 'px';
+        resetBtn.style.left = xpos + 'px';
     }
-    onresize(null);
+
+    function playBtnAction(e) {
+        isPaused = !isPaused;
+        if (isPaused) {
+            playBtn.innerHTML = 'Continue';
+        } else {
+            playBtn.innerHTML = 'Stop';
+            update();
+        }
+    }
 }
