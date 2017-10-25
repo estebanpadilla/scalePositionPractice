@@ -15,9 +15,11 @@ function init() {
 
     var bgColors = ['#feca0c', '#e44322', '#51e8b9', '#7e4556', '#0967b1'];
     var currentBbColor;
+    var startTime;
+    var endTime;
 
     var counter = 0;
-    var timeLimit = 30;
+    var timeLimit = 5;
     var timeCounter = timeLimit;
     var noteIndex = 0;
     var isPaused = false;
@@ -32,6 +34,7 @@ function init() {
     var timerTxt = document.createElement('p');
     var resetBtn = document.createElement('button');
     var playBtn = document.createElement('button');
+    var completedTxt = document.createElement('p');
     var buttonWidth = 300;
     var buttonHeight = 40;
 
@@ -42,6 +45,7 @@ function init() {
     timerTxt.id = 'timerTxt';
     resetBtn.id = 'resetBtn';
     playBtn.id = 'playBtn';
+    completedTxt.id = 'completedTxt';
 
     var textColor = 'white';
     var notesFontFamily = '"Oswald", sans-serif';
@@ -110,6 +114,12 @@ function init() {
     playBtn.style.marginLeft = 'auto';
     playBtn.style.marginRight = 'auto';
 
+    completedTxt.innerText = 'Press space bar to mark done'
+    completedTxt.style.color = textColor;
+    completedTxt.style.fontFamily = fontFamily;
+    completedTxt.style.marginTop = '5px';
+    completedTxt.style.marginBottom = '0px';
+
     body.appendChild(container);
     container.style.textAlign = 'center';
     container.appendChild(noteTxt);
@@ -117,6 +127,7 @@ function init() {
     container.appendChild(timerTxt);
     container.appendChild(resetBtn);
     container.appendChild(playBtn);
+    container.appendChild(completedTxt);
 
     window.onresize = onresize;
 
@@ -152,6 +163,17 @@ function init() {
         if (checkPreviousNotes(note)) {
             changePositionAndNote();
         } else {
+
+            if (startTime != null) {
+                endTime = new Date();
+                var timeDiff = endTime - startTime; //in ms
+                // strip the ms
+                timeDiff /= 1000;
+                previousNotes[(previousNotes.length - 1)].time = timeDiff;
+            }
+
+            previousNotes.push(note);
+            startTime = new Date();
             noteTxt.innerText = note.letter + '' + note.noteType;
             positionTxt.innerHTML = 'POSITION ' + note.position;
             getBgColor();
@@ -179,7 +201,6 @@ function init() {
                 return true;
             }
         }
-        previousNotes.push(pnote);
         return false;
 
     }
@@ -212,6 +233,17 @@ function init() {
         } else {
             playBtn.innerHTML = 'Stop';
             update();
+        }
+    }
+
+    document.body.onkeyup = function (e) {
+        if (e.keyCode == 32) {
+            if (!isPaused) {
+                previousNotes[(previousNotes.length - 1)].isCompletedBeforeTimeEnds = true;
+                timeCounter = timeLimit;
+                changePositionAndNote();
+                setTimer();
+            }
         }
     }
 }

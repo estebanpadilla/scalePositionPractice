@@ -5,6 +5,8 @@ var Note = (
 			this.letter = pletter;
 			this.position = 0;
 			this.noteType = '';
+			this.time = 0;
+			this.isCompletedBeforeTimeEnds = false;
 		}
 
 		Note.prototype.isPlayed = function (pnote) {
