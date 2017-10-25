@@ -19,7 +19,7 @@ function init() {
     var endTime;
 
     var counter = 0;
-    var timeLimit = 5;
+    var timeLimit = 30;
     var timeCounter = timeLimit;
     var noteIndex = 0;
     var isPaused = false;
@@ -114,7 +114,7 @@ function init() {
     playBtn.style.marginLeft = 'auto';
     playBtn.style.marginRight = 'auto';
 
-    completedTxt.innerText = 'Press space bar to mark done'
+    completedTxt.innerText = 'Press SPACE BAR to mark as completed.'
     completedTxt.style.color = textColor;
     completedTxt.style.fontFamily = fontFamily;
     completedTxt.style.marginTop = '5px';
