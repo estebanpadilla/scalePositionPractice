@@ -1,20 +1,22 @@
 {
-	"database": {
-		"rules": "database.rules.json"
-	},
-	"hosting": {
-		"public": "dist",
-		"rewrites": [{
-			"source": "**",
-			"destination": "/index.html"
-		}],
-		"ignore": [
-			"firebase.json",
-			".firebaserc",
-			"**/.*",
-			"**/node_modules/**",
-			"package.json",
-			".vscode"
-		]
-	}
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": "dist",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "**/node_modules/**",
+      "package.json",
+      ".vscode"
+    ]
+  }
 }

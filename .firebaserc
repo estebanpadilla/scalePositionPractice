@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "scalepractice-89fdb"
+    "default": "scalepractice-89fdb",
+    "none": "scalepractice-89fdb"
   }
 }
