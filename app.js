@@ -121,6 +121,8 @@ function init() {
     completedTxt.style.marginTop = '5px';
     completedTxt.style.marginBottom = '0px';
 
+    console.log('test');
+
     menuBtn.style.position = 'absolute';
     menuBtn.style.left = '20px';
     menuBtn.style.top = '20px';
