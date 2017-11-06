@@ -34,6 +34,7 @@ function init() {
     var timerTxt = document.createElement('p');
     var resetBtn = document.createElement('button');
     var playBtn = document.createElement('button');
+    var menuBtn = document.createElement('button');
     var completedTxt = document.createElement('p');
     var buttonWidth = 300;
     var buttonHeight = 40;
@@ -120,7 +121,15 @@ function init() {
     completedTxt.style.marginTop = '5px';
     completedTxt.style.marginBottom = '0px';
 
+    menuBtn.style.position = 'absolute';
+    menuBtn.style.left = '20px';
+    menuBtn.style.top = '20px';
+    menuBtn.style.width = '50px';
+    menuBtn.style.height = '50px';
+    menuBtn.addEventListener('click', menuBtnAction, false);
+
     body.appendChild(container);
+    body.appendChild(menuBtn);
     container.style.textAlign = 'center';
     container.appendChild(noteTxt);
     container.appendChild(positionTxt);
@@ -128,6 +137,7 @@ function init() {
     container.appendChild(resetBtn);
     container.appendChild(playBtn);
     container.appendChild(completedTxt);
+
 
     window.onresize = onresize;
 
@@ -152,7 +162,7 @@ function init() {
                 setTimer();
             }
         }
-    }
+    };
 
     function changePositionAndNote() {
         noteIndex = Math.floor(Math.random() * notes.length);
@@ -181,11 +191,11 @@ function init() {
             resetBtn.style.color = currentBbColor;
             playBtn.style.color = currentBbColor;
         }
-    }
+    };
 
     function setTimer() {
         timerTxt.innerText = 'Time: ' + timeCounter;
-    }
+    };
 
     function getBgColor() {
         var color = bgColors[(Math.floor(Math.random() * bgColors.length))];
@@ -193,7 +203,7 @@ function init() {
             return getBgColor();
         }
         currentBbColor = color;
-    }
+    };
 
     function checkPreviousNotes(pnote) {
         for (var i = 0; i < previousNotes.length; i++) {
@@ -202,15 +212,14 @@ function init() {
             }
         }
         return false;
-
-    }
+    };
 
     function setNewPosition(e) {
         timeCounter = timeLimit;
         changePositionAndNote();
         counter = 0;
         setTimer();
-    }
+    };
 
     onresize(null);
 
@@ -224,7 +233,7 @@ function init() {
         container.style.top = ypos + 'px';
         container.style.width = screenWidth + 'px';
         resetBtn.style.left = xpos + 'px';
-    }
+    };
 
     function playBtnAction(e) {
         isPaused = !isPaused;
@@ -234,7 +243,11 @@ function init() {
             playBtn.innerHTML = 'Stop';
             update();
         }
-    }
+    };
+
+    function menuBtnAction(e) {
+
+    };
 
     document.body.onkeyup = function (e) {
         if (e.keyCode == 32) {
@@ -245,5 +258,5 @@ function init() {
                 setTimer();
             }
         }
-    }
+    };
 }
