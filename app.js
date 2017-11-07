@@ -140,8 +140,11 @@ function init() {
     container.appendChild(playBtn);
     container.appendChild(completedTxt);
 
-
     window.onresize = onresize;
+
+    TweenMax.to(menuBtn, 2, {
+        left: 200
+    });
 
     setTimer();
     update();
