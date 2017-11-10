@@ -10,7 +10,7 @@ function init() {
     var a = new Note('A');
     var b = new Note('B');
     var notes = [c, d, e, f, g, a, b];
-    var modes = ['Jonico', 'Dorico', 'Frigio', 'Lidio', 'Mixolydio', 'Eolico', 'Locrio'];
+    var modes = ['Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian'];
     var notePositions = [1, 2, 3, 4, 5, 6, 7];
     var noteType = ['', 'b', '#'];
     var previousNotes = [];
@@ -51,7 +51,6 @@ function init() {
     var textColor = 'white';
     var notesFontFamily = '"Oswald", sans-serif';
     var fontFamily = '"Open Sans Condensed", sans-serif';
-
 
     modeTxt.style.color = textColor;
     modeTxt.style.fontFamily = notesFontFamily;
