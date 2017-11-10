@@ -13,7 +13,7 @@ function init() {
     var noteType = ['', 'b', '#'];
     var previousNotes = [];
 
-    var bgColors = ['#feca0c', '#e44322', '#51e8b9', '#7e4556', '#0967b1'];
+    var bgColors = ['#616e77', '#5c9ea5', '#5e98b7', '#a4845b', '#5d8fae', '#6d8566', '#bc7062', '#ff7275', '#4fcdba'];
     var currentBbColor;
     var startTime;
     var endTime;
@@ -22,7 +22,7 @@ function init() {
     var timeLimit = 30;
     var timeCounter = timeLimit;
     var noteIndex = 0;
-    var isPaused = false;
+    var isPaused = true;
 
     var body = document.getElementById('body');
     var screenWidth = body.clientWidth;
@@ -31,21 +31,15 @@ function init() {
     var container = document.createElement('div');
     var noteTxt = document.createElement('p');
     var positionTxt = document.createElement('p');
-    var timerTxt = document.createElement('p');
-    var resetBtn = document.createElement('button');
-    var playBtn = document.createElement('button');
-    var menuBtn = document.createElement('button');
     var completedTxt = document.createElement('p');
     var buttonWidth = 300;
     var buttonHeight = 40;
 
     container.style.position = 'absolute';
+    container.id = 'container';
 
     noteTxt.id = 'noteTxt';
     positionTxt.id = 'positionTxt';
-    timerTxt.id = 'timerTxt';
-    resetBtn.id = 'resetBtn';
-    playBtn.id = 'playBtn';
     completedTxt.id = 'completedTxt';
 
     var textColor = 'white';
@@ -68,87 +62,30 @@ function init() {
     positionTxt.style.marginBottom = '0px';
     positionTxt.style.userSelect = 'none';
 
-    timerTxt.style.color = textColor;
-    timerTxt.style.fontFamily = fontFamily;
-    timerTxt.style.fontSize = '20px';
-    timerTxt.style.marginTop = '-15px';
-    timerTxt.style.marginBottom = '0px';
-    timerTxt.style.userSelect = 'none';
-
-    resetBtn.style.textAlign = 'center';
-    resetBtn.style.height = buttonHeight + 'px';
-    resetBtn.style.width = screenWidth + 'px';
-    resetBtn.style.fontFamily = fontFamily;
-    resetBtn.style.fontSize = '20px';
-    resetBtn.style.color = 'black';
-    resetBtn.style.border = 'none';
-    resetBtn.style.borderRadius = '30px';
-    resetBtn.style.backgroundColor = textColor;
-    resetBtn.id = 'newBtn';
-    resetBtn.innerText = 'Reset';
-    resetBtn.addEventListener('click', setNewPosition, false);
-    resetBtn.style.width = buttonWidth + 'px';
-    resetBtn.style.outline = 'none';
-    resetBtn.style.cursor = 'pointer';
-    resetBtn.style.display = 'block';
-    resetBtn.style.marginTop = '20px';
-    resetBtn.style.marginLeft = 'auto';
-    resetBtn.style.marginRight = 'auto';
-
-    playBtn.style.textAlign = 'center';
-    playBtn.style.height = buttonHeight + 'px';
-    playBtn.style.width = screenWidth + 'px';
-    playBtn.style.fontFamily = fontFamily;
-    playBtn.style.fontSize = '20px';
-    playBtn.style.color = 'black';
-    playBtn.style.border = 'none';
-    playBtn.style.borderRadius = '30px';
-    playBtn.style.backgroundColor = textColor;
-    playBtn.id = 'newBtn';
-    playBtn.innerText = 'Pause';
-    playBtn.addEventListener('click', playBtnAction, false);
-    playBtn.style.width = buttonWidth + 'px';
-    playBtn.style.outline = 'none';
-    playBtn.style.cursor = 'pointer';
-    playBtn.style.display = 'block';
-    playBtn.style.marginTop = '10px';
-    playBtn.style.marginLeft = 'auto';
-    playBtn.style.marginRight = 'auto';
-
     completedTxt.innerText = 'Press SPACE BAR to mark as completed.'
     completedTxt.style.color = textColor;
     completedTxt.style.fontFamily = fontFamily;
     completedTxt.style.marginTop = '5px';
     completedTxt.style.marginBottom = '0px';
 
-    console.log('test');
-
-    menuBtn.style.position = 'absolute';
-    menuBtn.style.left = '20px';
-    menuBtn.style.top = '20px';
-    menuBtn.style.width = '50px';
-    menuBtn.style.height = '50px';
-    menuBtn.addEventListener('click', menuBtnAction, false);
-
     body.appendChild(container);
-    body.appendChild(menuBtn);
     container.style.textAlign = 'center';
     container.appendChild(noteTxt);
     container.appendChild(positionTxt);
-    container.appendChild(timerTxt);
-    container.appendChild(resetBtn);
-    container.appendChild(playBtn);
+
+    var resetbtn = new Buttom('resetbtn', 'reset', setNewPosition);
+    //var notesBtn = new Buttom('notesBtn', 'notes', null);
+    //var listBtn = new Buttom('listBtn', 'list', null);
+    var timerbtn = new Buttom('timerbtn', 'timer', null);
+    var playBtn = new Buttom('playBtn', 'play', playBtnAction);
+
     container.appendChild(completedTxt);
 
     window.onresize = onresize;
 
-    TweenMax.to(menuBtn, 2, {
-        left: 200
-    });
-
-    setTimer();
     update();
     changePositionAndNote();
+    setTimer();
 
     function update() {
         if (!isPaused) {
@@ -193,13 +130,11 @@ function init() {
             positionTxt.innerHTML = 'POSITION ' + note.position;
             getBgColor();
             body.style.backgroundColor = currentBbColor;
-            resetBtn.style.color = currentBbColor;
-            playBtn.style.color = currentBbColor;
         }
     };
 
     function setTimer() {
-        timerTxt.innerText = 'Time: ' + timeCounter;
+        timerbtn.updateText(timeCounter, currentBbColor)
     };
 
     function getBgColor() {
@@ -219,7 +154,7 @@ function init() {
         return false;
     };
 
-    function setNewPosition(e) {
+    function setNewPosition() {
         timeCounter = timeLimit;
         changePositionAndNote();
         counter = 0;
@@ -237,15 +172,11 @@ function init() {
         var xpos = (screenWidth - buttonWidth) / 2;
         container.style.top = ypos + 'px';
         container.style.width = screenWidth + 'px';
-        resetBtn.style.left = xpos + 'px';
     };
 
-    function playBtnAction(e) {
+    function playBtnAction() {
         isPaused = !isPaused;
-        if (isPaused) {
-            playBtn.innerHTML = 'Continue';
-        } else {
-            playBtn.innerHTML = 'Stop';
+        if (!isPaused) {
             update();
         }
     };

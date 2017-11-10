@@ -1,4 +1,4 @@
-html,
+    html,
 body {
     padding: 0px;
     margin: 0px;
@@ -8,3 +8,13 @@ canvas {
     background: #2b0d3b;
     position: absolute;
 }
+
+svg text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+svg text::selection {
+    background: none;
