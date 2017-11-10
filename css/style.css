@@ -1,20 +1,87 @@
     html,
-body {
-    padding: 0px;
-    margin: 0px;
-}
+    body {
+        padding: 0px;
+        margin: 0;
+        height: 100%;
+        overflow: hidden
+    }
 
-canvas {
-    background: #2b0d3b;
-    position: absolute;
-}
+    canvas {
+        background: #2b0d3b;
+        position: absolute;
+    }
 
-svg text {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+    svg text {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
-svg text::selection {
-    background: none;
+    svg text::selection {
+        background: none;
+    }
+
+    p {
+        display: inline-block;
+    }
+
+    .main_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+    }
+
+    .note_container {}
+
+    .position_container {}
+
+    .buttons_container {
+        display: inline-block;
+    }
+
+    .text_container {}
+
+    .options_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        background-color: white;
+        width: 100%;
+        height: auto;
+    }
+
+    .options_title_container p {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        font-size: 15px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 800;
+    }
+
+    .options_keys_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .options_modes_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    .closeBtn_modes_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }

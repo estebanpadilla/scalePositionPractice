@@ -7,6 +7,7 @@ var Note = (
 			this.noteType = '';
 			this.time = 0;
 			this.isCompletedBeforeTimeEnds = false;
+			this.isActive = true;
 		}
 
 		Note.prototype.isPlayed = function (pnote) {

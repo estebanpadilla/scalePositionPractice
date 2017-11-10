@@ -5,16 +5,40 @@
     <title>App</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,800" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
     <link href="css/style.css" rel="stylesheet">
     <script src="app.js"></script>
     <script src="js/note.js"></script>
     <script src="js/buttom.js"></script>
+    <script src="js/keyButton.js"></script>
+    <script src="js/modeButtom.js"></script>
+    <script src="js/closeButtom.js"></script>
+    <script src="js/keyTypeButtom.js"></script>
+    <script src="js/svgText.js"></script>
 </head>
 
 <body id="body">
+
+    <div id="main_container" class="main_container">
+        <div id="note_container" class="note_container"></div>
+        <div id="mode_container" class="mode_container"></div>
+        <div id="position_container" class "position_container"></div>
+        <div id="buttons_container" class="buttons_container"></div>
+        <div id="text_container" class="text_container"> </div>
+    </div>
+
+    <div id="options_container" class="options_container">
+        <div id="options_title_container" class="options_title_container">
+            <p>Choose the key options to practice</p>
+        </div>
+        <div id="options_keys_container" class="options_keys_container"></div>
+        <div id="options_modes_container" class="options_modes_container"></div>
+        <div id="closeBtn_modes_container" class="closeBtn_modes_container"></div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
     <script>
         // Initialize Firebase

@@ -45,7 +45,6 @@ var Buttom = (
 			}
 
 			this.svg.addEventListener("click", this, false);
-			this.svg.addEventListener("touchstart", this, false);
 		}
 
 		Buttom.prototype.handleEvent = function (e) {
@@ -61,7 +60,7 @@ var Buttom = (
 
 		Buttom.prototype.create = function (pathData) {
 
-			var container = document.getElementById('container');
+			var container = document.getElementById('buttons_container');
 			this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 			this.svg.setAttribute('width', '60');
 			this.svg.setAttribute('height', '60');
@@ -145,7 +144,8 @@ var Buttom = (
 			this.timerTxt.setAttribute('x', '30');
 			this.timerTxt.setAttribute('y', '42');
 			this.timerTxt.setAttribute('text-anchor', 'middle');
-			this.timerTxt.style.fontFamily = '"Open Sans Condensed", sans-serif';
+			this.timerTxt.setAttribute('font-family', '"Open Sans Condensed", sans-serif');
+			//this.timerTxt.setAttribute('stroke', 'black')
 			this.svg.appendChild(this.timerTxt);
 		}
 
